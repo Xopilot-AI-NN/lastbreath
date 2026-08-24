@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1c16">
+  <meta name="description" content="Статус серверов Last Breath в реальном времени.">
+  <title>Статус — Last Breath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="assets/server-icon.png">
+  <meta property="og:title" content="Статус — Last Breath">
+  <meta property="og:description" content="Статус серверов Last Breath в реальном времени.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:image" content="https://lastbreathfun.ru/assets/server-icon.png">
+  <meta name="twitter:card" content="summary">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="logo" href="index.html#top">
+          <img class="logo-icon" src="assets/server-icon.png" alt="Last Breath">
+          <span class="logo-word">
+            <span class="logo-text">LAST<span>BREATH</span></span>
+            <span class="logo-sub">MINECRAFT PROJECT</span>
+          </span>
+        </a>
+
+        <nav class="nav" id="nav">
+          <a href="index.html">Главная</a>
+          <a href="modes.html">Режимы</a>
+          <a href="status.html" class="active">Статус</a>
+          <a href="rules.html">Правила</a>
+          <a href="about.html">О проекте</a>
+        </nav>
+
+        <button class="top-ip copy-btn" data-copy="mc.lastbreathfun.ru">mc.lastbreathfun.ru</button>
+        <button class="menu-button" id="menuButton" aria-label="Меню">☰</button>
+      </div>
+    </header>
+    <div class="pixel-strip" aria-hidden="true"></div>
+
+    <main id="top">
+      <section class="page-hero">
+        <div class="page-glow" aria-hidden="true"></div>
+        <div class="container">
+          <div class="kicker">СТАТУС</div>
+          <h1>Онлайн прямо сейчас.</h1>
+          <p>
+            Данные о сервере запрашиваются напрямую из игры и обновляются
+            автоматически. Если сервер не отвечает — попробуй обновить страницу
+            через минуту.
+          </p>
+        </div>
+      </section>
+
+      <section class="section servers" id="live-status">
+        <div class="container">
+          <div class="section-intro reveal">
+            <div class="section-number">01</div>
+            <div>
+              <div class="kicker">ВЫЖИВАНИЕ</div>
+              <h2>mc.lastbreathfun.ru</h2>
+            </div>
+          </div>
+
+          <div class="status-card reveal">
+            <div class="status-main">
+              <span class="status-dot" id="statusDot"></span>
+              <div class="status-text">
+                <h3 id="statusTitle">Проверка статуса…</h3>
+                <small id="statusSub">mc.lastbreathfun.ru</small>
+              </div>
+            </div>
+
+            <div class="status-stats">
+              <div>
+                <span>ИГРОКОВ</span>
+                <strong id="statPlayers">—</strong>
+              </div>
+              <div>
+                <span>ВЕРСИЯ</span>
+                <strong id="statVersion">—</strong>
+              </div>
+            </div>
+
+            <button class="status-refresh" id="statusRefresh">Обновить</button>
+
+            <p class="status-motd" id="statusMotd"></p>
+          </div>
+
+          <p class="status-note">
+            Обновляется автоматически раз в минуту · источник: api.mcsrvstat.us
+          </p>
+
+          <div class="status-static reveal">
+            <div>
+              <h4>Ванила</h4>
+              <p>Режим временно закрыт администрацией, проверка статуса не выполняется.</p>
+            </div>
+            <span class="state state-offline"><i></i> ВРЕМЕННО ЗАКРЫТ</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-top">
+        <div>
+          <div class="footer-brand">LASTBREATH</div>
+          <p>Minecraft проект.</p>
+        </div>
+        <div class="footer-credit">
+          <span>Сайт создан организацией</span>
+          <strong>Xopilot</strong>
+        </div>
+      </div>
+
+      <div class="container quick-links">
+        <a href="modes.html">Режимы<small>Текущие и будущие</small></a>
+        <a href="status.html">Статус<small>Онлайн сейчас</small></a>
+        <a href="rules.html">Правила<small>Полный свод</small></a>
+        <a href="about.html">О проекте<small>Идея и цели</small></a>
+      </div>
+
+      <div class="container footer-disclaimer">
+        Last Breath — независимый проект сообщества, не является официальным продуктом Minecraft
+        и не связан с Mojang Studios или Microsoft, не одобрен и не спонсируется ими.
+        Minecraft — товарный знак Mojang Synergies AB.
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© 2026 Last Breath</span>
+        <a href="#top">Наверх ↑</a>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
