@@ -19,6 +19,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="fb-cube" viewBox="0 0 40 40">
+      <polygon class="fb-top" points="20,0 40,10 20,20 0,10"/>
+      <polygon class="fb-left" points="0,10 20,20 20,40 0,30"/>
+      <polygon class="fb-right" points="40,10 20,20 20,40 40,30"/>
+    </symbol>
+  </svg>
   <div class="site-shell">
     <header class="topbar">
       <div class="container topbar-inner">
@@ -47,7 +54,17 @@
     <main id="top">
       <section class="hero">
         <div class="hero-grid"></div>
-        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="float-blocks" aria-hidden="true">
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+        </div>
 
         <div class="container hero-inner">
           <div class="hero-copy">
@@ -74,6 +91,10 @@
               <span class="status-dot" id="miniDot"></span>
               <span id="miniLabel">Проверка статуса…</span>
             </div>
+            <div class="mini-status" id="visitorStat" style="display:none">
+              <span class="status-dot on"></span>
+              <span id="visitorCount">— на сайте сейчас</span>
+            </div>
           </div>
         </div>
 
@@ -88,11 +109,8 @@
       <section class="section servers" id="servers">
         <div class="container">
           <div class="section-intro reveal">
-            <div class="section-number">01</div>
-            <div>
-              <div class="kicker">РЕЖИМЫ</div>
-              <h2>Выбирай свой мир.</h2>
-            </div>
+            <div class="kicker">РЕЖИМЫ</div>
+            <h2>Выбирай свой мир.</h2>
           </div>
 
           <div class="server-list">
@@ -143,23 +161,21 @@
       <section class="section about" id="about">
         <div class="container about-layout">
           <div class="about-title">
-            <div class="section-number">02</div>
-            <div>
-              <div class="kicker">О ПРОЕКТЕ</div>
-              <h2>Больше, чем обычный сервер.</h2>
-            </div>
+            <div class="kicker">О ПРОЕКТЕ</div>
+            <h2>Больше, чем обычный сервер.</h2>
           </div>
 
           <div class="about-text reveal">
             <p>
-              Last Breath — это Minecraft-проект с большим количеством мини-игр,
-              созданный для тех, кому хочется большего, чем бесконечные однотипные
-              PvP-битвы. Здесь каждый игрок сможет найти режим под своё настроение.
+              Last Breath я начал делать, потому что задолбался от серверов,
+              где всё сводится к трём одинаковым PvP-аренам. Хочется, чтобы
+              здесь каждый находил режим под своё настроение, а не только
+              под победу.
             </p>
             <p>
-              Классика вроде SkyWars и BedWars никуда не денется, но станет лишь
-              частью большого мира развлечений — рядом с ней появятся авторские
-              режимы, которых нет на других серверах.
+              SkyWars и BedWars никуда не денутся — классику я люблю сам.
+              Но рядом с ней постепенно появятся свои режимы, которых
+              больше нигде нет.
             </p>
             <div class="facts">
               <div><span>01</span><strong>Выживание</strong><small>открыто сейчас</small></div>
@@ -176,11 +192,8 @@
       <section class="section rules" id="rules">
         <div class="container">
           <div class="section-intro reveal">
-            <div class="section-number">03</div>
-            <div>
-              <div class="kicker">ПРАВИЛА</div>
-              <h2>Чтобы всем было нормально.</h2>
-            </div>
+            <div class="kicker">ПРАВИЛА</div>
+            <h2>Чтобы всем было нормально.</h2>
           </div>
 
           <div class="rules-note reveal">
@@ -242,5 +255,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script type="module" src="realtime-visitors.js"></script>
 </body>
 </html>

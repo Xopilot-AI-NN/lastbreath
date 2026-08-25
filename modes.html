@@ -19,6 +19,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="fb-cube" viewBox="0 0 40 40">
+      <polygon class="fb-top" points="20,0 40,10 20,20 0,10"/>
+      <polygon class="fb-left" points="0,10 20,20 20,40 0,30"/>
+      <polygon class="fb-right" points="40,10 20,20 20,40 40,30"/>
+    </symbol>
+  </svg>
   <div class="site-shell">
     <header class="topbar">
       <div class="container topbar-inner">
@@ -46,7 +53,13 @@
 
     <main id="top">
       <section class="page-hero">
-        <div class="page-glow" aria-hidden="true"></div>
+        <div class="float-blocks" aria-hidden="true">
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+          <svg class="float-block"><use href="#fb-cube"/></svg>
+        </div>
         <div class="container">
           <div class="kicker">РЕЖИМЫ</div>
           <h1>Выбирай свой мир.</h1>
@@ -61,11 +74,8 @@
       <section class="section servers" id="live">
         <div class="container">
           <div class="section-intro reveal">
-            <div class="section-number">01</div>
-            <div>
-              <div class="kicker">СЕЙЧАС НА СЕРВЕРЕ</div>
-              <h2>Уже можно играть.</h2>
-            </div>
+            <div class="kicker">СЕЙЧАС НА СЕРВЕРЕ</div>
+            <h2>Уже можно играть.</h2>
           </div>
 
           <div class="server-list">
@@ -112,11 +122,8 @@
       <section class="section about" id="soon">
         <div class="container">
           <div class="section-intro reveal">
-            <div class="section-number">02</div>
-            <div>
-              <div class="kicker">В РАЗРАБОТКЕ</div>
-              <h2>Скоро на сервере.</h2>
-            </div>
+            <div class="kicker">В РАЗРАБОТКЕ</div>
+            <h2>Скоро на сервере.</h2>
           </div>
 
           <div class="server-list">
@@ -180,41 +187,32 @@
       <section class="section rules" id="features">
         <div class="container">
           <div class="section-intro reveal">
-            <div class="section-number">03</div>
-            <div>
-              <div class="kicker">ЧТО ВАС ЖДЁТ</div>
-              <h2>Не только победа.</h2>
-            </div>
+            <div class="kicker">ЧТО ВАС ЖДЁТ</div>
+            <h2>Не только победа.</h2>
           </div>
 
           <div class="feature-grid">
             <div class="feature-card reveal">
-              <span>01</span>
               <h4>Классика в новом формате</h4>
               <p>Знакомые мини-игры в улучшенном и более честном виде.</p>
             </div>
             <div class="feature-card reveal">
-              <span>02</span>
               <h4>Полностью новые режимы</h4>
               <p>Механики, карты и задания, созданные специально для проекта.</p>
             </div>
             <div class="feature-card reveal">
-              <span>03</span>
               <h4>PvP и рейтинги</h4>
               <p>Для тех, кто любит честную конкуренцию и быстрые реакции.</p>
             </div>
             <div class="feature-card reveal">
-              <span>04</span>
               <h4>Командные игры</h4>
               <p>Для друзей, кланов и новых знакомств внутри проекта.</p>
             </div>
             <div class="feature-card reveal">
-              <span>05</span>
               <h4>Испытания и награды</h4>
               <p>Достижения, задания и награды за активность на сервере.</p>
             </div>
             <div class="feature-card reveal">
-              <span>06</span>
               <h4>Регулярные обновления</h4>
               <p>Новые карты, режимы и события без долгих затиший.</p>
             </div>

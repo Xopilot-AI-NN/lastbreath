@@ -106,6 +106,10 @@ loadStatus();
 setInterval(loadStatus, 60000);
 document.getElementById('statusRefresh')?.addEventListener('click', loadStatus);
 
+/* Живой счётчик "сейчас на сайте" вынесен в отдельный модуль —
+   realtime-visitors.js (использует Firebase Realtime Database, без
+   своего сервера). Настройка описана в README.md. */
+
 /* ---------- scroll reveal ---------- */
 /* .reveal элементы (карточки режимов, feature-card, крупные текстовые блоки)
    плавно проявляются при попадании во вьюпорт. threshold:0 — срабатывает от
