@@ -2,6 +2,95 @@ const nav = document.getElementById('nav');
 const menuButton = document.getElementById('menuButton');
 const toast = document.getElementById('toast');
 
+const DAY = 24 * 60 * 60 * 1000;
+const J2000 = Date.UTC(2000, 0, 1, 12);
+const PLANETS = [
+  { name: 'Меркурий', period: 87.969, longitude: 252.25, radius: 7, size: 18 },
+  { name: 'Венера', period: 224.701, longitude: 181.98, radius: 11, size: 24 },
+  { name: 'Земля', period: 365.256, longitude: 100.46, radius: 15, size: 27 },
+  { name: 'Марс', period: 686.98, longitude: 355.45, radius: 19, size: 22 },
+  { name: 'Юпитер', period: 4332.59, longitude: 34.40, radius: 25, size: 48 },
+  { name: 'Сатурн', period: 10759.22, longitude: 49.94, radius: 32, size: 42 },
+  { name: 'Уран', period: 30688.5, longitude: 313.23, radius: 39, size: 34 },
+  { name: 'Нептун', period: 60182, longitude: 304.88, radius: 46, size: 33 }
+];
+const PLANET_PALETTES = [
+  ['#ead7ff', '#9d68e8', '#3b1b73'], ['#f4c6f0', '#c05bb8', '#54145d'],
+  ['#d4c8ff', '#7666d7', '#2b2166'], ['#ffd0e4', '#c66a9f', '#521744'],
+  ['#d8c7ff', '#8463c3', '#302052'], ['#f3d8ff', '#a66fdd', '#452275'],
+  ['#c8d0ff', '#665bb8', '#25204f'], ['#f1c4df', '#aa518a', '#48153d']
+];
+
+function randomBetween(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function createSpaceScene(scene) {
+  scene.replaceChildren();
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < 72; index += 1) {
+    const star = document.createElement('i');
+    star.className = 'star';
+    star.style.setProperty('--star-x', `${randomBetween(1, 99)}%`);
+    star.style.setProperty('--star-y', `${randomBetween(2, 98)}%`);
+    star.style.setProperty('--star-size', `${randomBetween(.7, 2.1).toFixed(1)}px`);
+    star.style.setProperty('--star-opacity', randomBetween(.3, .95).toFixed(2));
+    star.style.setProperty('--star-speed', `${randomBetween(2.5, 7).toFixed(1)}s`);
+    star.style.animationDelay = `-${randomBetween(0, 7).toFixed(1)}s`;
+    fragment.append(star);
+  }
+
+  const daysSinceJ2000 = (Date.now() - J2000) / DAY;
+  PLANETS.forEach((planetData, index) => {
+    const planet = document.createElement('i');
+    const [light, main, dark] = PLANET_PALETTES[index % PLANET_PALETTES.length];
+    const angle = (planetData.longitude + (360 * daysSinceJ2000) / planetData.period) * Math.PI / 180;
+    const x = planetData.radius * Math.cos(angle);
+    const y = planetData.radius * Math.sin(angle) * .38;
+    const texture = [
+      `radial-gradient(circle at ${randomBetween(16, 82).toFixed(0)}% ${randomBetween(18, 82).toFixed(0)}%, rgba(34, 9, 72, .55) 0 3%, transparent 4%)`,
+      `radial-gradient(circle at ${randomBetween(16, 82).toFixed(0)}% ${randomBetween(18, 82).toFixed(0)}%, rgba(34, 9, 72, .45) 0 5%, transparent 6%)`,
+      `radial-gradient(ellipse at ${randomBetween(20, 75).toFixed(0)}% ${randomBetween(25, 75).toFixed(0)}%, transparent 0 13%, rgba(34, 9, 72, .4) 14% 17%, transparent 18%)`,
+      `repeating-linear-gradient(${randomBetween(0, 180).toFixed(0)}deg, transparent 0 12%, rgba(255,255,255,.18) 13% 16%, transparent 17% 28%)`
+    ].join(',');
+    planet.className = 'planet';
+    planet.setAttribute('title', planetData.name);
+    planet.dataset.period = String(planetData.period);
+    planet.dataset.longitude = String(planetData.longitude);
+    planet.dataset.radius = String(planetData.radius);
+    planet.style.left = `calc(50% + ${x.toFixed(3)}vw)`;
+    planet.style.top = `calc(50% + ${y.toFixed(3)}vw)`;
+    planet.style.setProperty('--planet-size', `${planetData.size}px`);
+    planet.style.setProperty('--planet-light', light);
+    planet.style.setProperty('--planet-main', main);
+    planet.style.setProperty('--planet-dark', dark);
+    planet.style.setProperty('--planet-texture', texture);
+    planet.style.setProperty('--planet-glow', `${main}66`);
+    planet.style.setProperty('--planet-opacity', randomBetween(.55, .82).toFixed(2));
+    planet.style.setProperty('--ring-angle', `${randomBetween(-35, 35).toFixed(0)}deg`);
+    planet.style.setProperty('--ring-opacity', planetData.name === 'Сатурн' ? '.8' : '0');
+    fragment.append(planet);
+  });
+
+  scene.append(fragment);
+}
+
+function updatePlanetPositions(scene) {
+  const daysSinceJ2000 = (Date.now() - J2000) / DAY;
+  scene.querySelectorAll('.planet').forEach((planet) => {
+    const angle = (Number(planet.dataset.longitude) + (360 * daysSinceJ2000) / Number(planet.dataset.period)) * Math.PI / 180;
+    const radius = Number(planet.dataset.radius);
+    planet.style.left = `calc(50% + ${(radius * Math.cos(angle)).toFixed(3)}vw)`;
+    planet.style.top = `calc(50% + ${(radius * Math.sin(angle) * .38).toFixed(3)}vw)`;
+  });
+}
+
+document.querySelectorAll('.space-scene').forEach((scene) => {
+  createSpaceScene(scene);
+  setInterval(() => updatePlanetPositions(scene), 60 * 1000);
+});
+
 menuButton?.addEventListener('click', () => {
   nav.classList.toggle('open');
 });

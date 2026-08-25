@@ -91,43 +91,18 @@ html{scrollbar-width:thin;scrollbar-color:rgba(157,109,255,.35) transparent}
   background:var(--accent)
 }
 
-/* ---------- floating blocks (ambient background, replaces blurred glow) ---------- */
-/* Лёгкая CSS-анимация вместо blur-пятна: несколько пиксельных кубов
-   медленно всплывают снизу вверх. Только transform+opacity (композитится
-   на GPU, без filter/blur), фиксированное число элементов — недорого. */
-.float-blocks{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
-.float-block{position:absolute;bottom:-8%;width:28px;height:28px;opacity:0;animation:float-up linear infinite}
-.float-block .fb-top{fill:var(--accent-2)}
-.float-block .fb-left{fill:var(--accent)}
-.float-block .fb-right{fill:#5b3fc4}
-.float-block:nth-child(even){filter:hue-rotate(18deg)}
-
-@keyframes float-up{
-  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0}
-  10%{opacity:.5}
-  88%{opacity:.42}
-  100%{transform:translateY(-125vh) translateX(var(--fb-drift,30px)) rotate(var(--fb-spin,24deg));opacity:0}
-}
-
-.hero .float-blocks .float-block:nth-child(1){left:6%;width:22px;height:22px;animation-duration:26s;animation-delay:-2s;--fb-drift:24px;--fb-spin:20deg}
-.hero .float-blocks .float-block:nth-child(2){left:16%;width:34px;height:34px;animation-duration:34s;animation-delay:-14s;--fb-drift:-30px;--fb-spin:-18deg}
-.hero .float-blocks .float-block:nth-child(3){left:28%;width:18px;height:18px;animation-duration:21s;animation-delay:-7s;--fb-drift:18px;--fb-spin:26deg}
-.hero .float-blocks .float-block:nth-child(4){left:41%;width:26px;height:26px;animation-duration:30s;animation-delay:-22s;--fb-drift:-22px;--fb-spin:-14deg}
-.hero .float-blocks .float-block:nth-child(5){left:55%;width:20px;height:20px;animation-duration:24s;animation-delay:-4s;--fb-drift:26px;--fb-spin:22deg}
-.hero .float-blocks .float-block:nth-child(6){left:66%;width:36px;height:36px;animation-duration:38s;animation-delay:-18s;--fb-drift:-34px;--fb-spin:-24deg}
-.hero .float-blocks .float-block:nth-child(7){left:78%;width:22px;height:22px;animation-duration:27s;animation-delay:-11s;--fb-drift:20px;--fb-spin:16deg}
-.hero .float-blocks .float-block:nth-child(8){left:88%;width:30px;height:30px;animation-duration:32s;animation-delay:-26s;--fb-drift:-26px;--fb-spin:-20deg}
-.hero .float-blocks .float-block:nth-child(9){left:94%;width:16px;height:16px;animation-duration:19s;animation-delay:-9s;--fb-drift:16px;--fb-spin:28deg}
-
-.page-hero .float-blocks .float-block:nth-child(1){left:10%;width:20px;height:20px;animation-duration:25s;animation-delay:-3s;--fb-drift:20px;--fb-spin:18deg}
-.page-hero .float-blocks .float-block:nth-child(2){left:32%;width:28px;height:28px;animation-duration:31s;animation-delay:-16s;--fb-drift:-24px;--fb-spin:-16deg}
-.page-hero .float-blocks .float-block:nth-child(3){left:58%;width:18px;height:18px;animation-duration:22s;animation-delay:-8s;--fb-drift:18px;--fb-spin:22deg}
-.page-hero .float-blocks .float-block:nth-child(4){left:76%;width:24px;height:24px;animation-duration:29s;animation-delay:-20s;--fb-drift:-20px;--fb-spin:-18deg}
-.page-hero .float-blocks .float-block:nth-child(5){left:90%;width:16px;height:16px;animation-duration:20s;animation-delay:-5s;--fb-drift:16px;--fb-spin:20deg}
-
-@media (prefers-reduced-motion: reduce){
-  .float-blocks{display:none}
-}
+/* ---------- space background ---------- */
+.space-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;background:#171722;filter:blur(1px)}
+.space-scene::before{content:'';position:absolute;left:50%;top:50%;width:clamp(26px,4vw,54px);height:clamp(26px,4vw,54px);border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#fff2b0 0 8%,#e7a239 35%,#a83a75 72%,transparent 73%);box-shadow:0 0 30px #d877d088,0 0 70px #914ad844}
+.space-scene::after{content:'';position:absolute;inset:8% 12%;border:1px solid rgba(173,130,230,.12);border-radius:50%;transform:scaleY(.34);box-shadow:0 0 0 9vw rgba(173,130,230,.045),0 0 0 18vw rgba(173,130,230,.035),0 0 0 27vw rgba(173,130,230,.025)}
+.star{position:absolute;width:var(--star-size);height:var(--star-size);left:var(--star-x);top:var(--star-y);border-radius:50%;background:#fff;opacity:var(--star-opacity);box-shadow:0 0 5px rgba(214,196,255,.8);animation:star-twinkle var(--star-speed) ease-in-out infinite alternate;will-change:opacity}
+.planet{position:absolute;left:50%;top:50%;width:var(--planet-size);height:var(--planet-size);border-radius:50%;opacity:var(--planet-opacity);transform:translate(-50%,-50%);background:radial-gradient(circle at 31% 24%,var(--planet-light) 0 7%,var(--planet-main) 37%,var(--planet-dark) 100%);filter:hue-rotate(-8deg) saturate(1.25);box-shadow:inset -18px -14px 24px rgba(9,7,22,.68),inset 8px 6px 12px rgba(255,255,255,.3),0 0 28px var(--planet-glow),0 0 0 1px rgba(224,196,255,.14);transition:left 70s linear,top 70s linear,opacity .8s ease;will-change:left,top,opacity}
+.planet::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--planet-texture);mix-blend-mode:soft-light;opacity:.78}
+.planet::after{content:'';position:absolute;inset:-12% -25%;border:1px solid rgba(207,177,255,.38);border-radius:50%;transform:rotate(var(--ring-angle)) scaleY(.25);opacity:var(--ring-opacity);box-shadow:0 0 8px rgba(167,119,255,.18)}
+.planet-hidden{visibility:hidden}
+@keyframes star-twinkle{from{opacity:calc(var(--star-opacity) * .45)}to{opacity:var(--star-opacity)}}
+@media (max-width:620px){.planet{max-width:72px;max-height:72px}.star{box-shadow:0 0 3px rgba(214,196,255,.7)}}
+@media (prefers-reduced-motion:reduce){.space-scene{filter:none}.star,.planet{animation:none;transition:none}}
 
 /* ---------- hero ---------- */
 .hero{
